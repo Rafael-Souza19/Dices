@@ -17,20 +17,24 @@ def alternar_desalternar():
 def rolar_d20():
     
     if vantagem_var.get() == 1:
+        
         numeros_aleatorios20 = random.choices(range(1, 21), k=2)
-        texto_resposta_d20["text"] = f"Resultado: {numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
+        texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
         if 20 in numeros_aleatorios20:
             texto_resposta_d20["foreground"] = "green"
-            texto_resposta_d20["text"] = f"Resultado: {numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
         elif numeros_aleatorios20[0] == numeros_aleatorios20[1] == 1:
             texto_resposta_d20["foreground"] = "red"
-            texto_resposta_d20["text"] = f"Resultado: {numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
         else:
             texto_resposta_d20["foreground"] = "black"
-            texto_resposta_d20["text"] = f"Resultado: {numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
+    
+
+    
     else:
         numero_aleatorio20 = random.randint(1, 20)
-        texto_resposta_d20["text"] = f"Resultado: {numero_aleatorio20}"
+        texto_resposta_d20["text"] = f"{numero_aleatorio20}"
         if numero_aleatorio20 == 20:
             texto_resposta_d20["fg"] = "green"
         elif numero_aleatorio20 == 1:
@@ -42,19 +46,19 @@ def rolar_d20():
 
 def rolar_d8():
     numero_aleatorio8 = random.randint(1, 8)
-    texto_resposta_d8["text"] = f"Resultado: {numero_aleatorio8}"
+    texto_resposta_d8["text"] = f"{numero_aleatorio8}"
 
 def rolar_d6():
     numero_aleatorio6 = random.randint(1, 6)
-    texto_resposta_d6["text"] = f"Resultado: {numero_aleatorio6}"
+    texto_resposta_d6["text"] = f"{numero_aleatorio6}"
 
 def rolar_d12():
     numero_aleatorio12 = random.randint(1, 12)
-    texto_resposta_d12["text"] = f"Resultado: {numero_aleatorio12}"
+    texto_resposta_d12["text"] = f"{numero_aleatorio12}"
 
 def rolar_d4():
     numero_aleatorio4 = random.randint(1, 4)
-    texto_resposta_d4["text"] = f"Resultado: {numero_aleatorio4}"
+    texto_resposta_d4["text"] = f"{numero_aleatorio4}"
 
 
 app = Tk()
