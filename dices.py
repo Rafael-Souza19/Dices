@@ -16,19 +16,42 @@ def alternar_desalternar():
 
 def rolar_d20():
     
-    if vantagem_var.get() == 1:
+    if desvantagem_var.get() == 1:
+        numeros_aleatorios20 = random.choices(range(1, 21))
+        numeros_aleatorios201 = random.choices(range(1, 21))
+
+        if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
+            if numeros_aleatorios20[0] < numeros_aleatorios201[0]:
+                numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
+            else:
+                numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
+                
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+        else: 
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+
+
+    elif vantagem_var.get() == 1:
         
-        numeros_aleatorios20 = random.choices(range(1, 21), k=2)
-        texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
-        if 20 in numeros_aleatorios20:
+        numeros_aleatorios20 = random.choices(range(1, 21))
+        numeros_aleatorios201 = random.choices(range(1, 21))
+
+        if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
+            if numeros_aleatorios20[0] > numeros_aleatorios201[0]:
+                numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
+            else:
+                numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
+                
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+        else: 
+            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+
+        if 20 in numeros_aleatorios20 or 20 in numeros_aleatorios201:
             texto_resposta_d20["foreground"] = "green"
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
-        elif numeros_aleatorios20[0] == numeros_aleatorios20[1] == 1:
+        elif numeros_aleatorios20[0] == numeros_aleatorios201[0] == 1:
             texto_resposta_d20["foreground"] = "red"
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
         else:
             texto_resposta_d20["foreground"] = "black"
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios20[1]}"
     
 
     
@@ -66,63 +89,64 @@ app = Tk()
 app.title("Sistema de Dados")
 app.geometry("600x500")
 
+
 texto_d20 = Label(app, text="D20")
-texto_d20.grid(column=0, row=0, padx=10, pady=10)
+texto_d20.grid(column=0, row=2, padx=10, pady=10)
 
 botao_d20 = Button(app, text="Aperte para rolar", command=rolar_d20)
-botao_d20.grid(column=0, row=1, padx=10, pady=10)
+botao_d20.grid(column=0, row=3, padx=10, pady=10)
 
 texto_resposta_d20 = Label(app, text="")
-texto_resposta_d20.grid(column=0, row=2, padx=10, pady=10)
+texto_resposta_d20.grid(column=0, row=4, padx=10, pady=10)
 
 
 texto_d12 = Label(app, text="D12")
-texto_d12.grid(column=1, row=0, padx=10, pady=10)
+texto_d12.grid(column=1, row=2, padx=10, pady=10)
 
 botao_d12 = Button(app, text="Aperte para rolar", command=rolar_d12)
-botao_d12.grid(column=1, row=1, padx=10, pady=10)
+botao_d12.grid(column=1, row=3, padx=10, pady=10)
 
 texto_resposta_d12 = Label(app, text="")
-texto_resposta_d12.grid(column=1, row=2, padx=10, pady=10)
+texto_resposta_d12.grid(column=1, row=4, padx=10, pady=10)
 
 texto_d8 = Label(app, text="D8")
-texto_d8.grid(column=2, row=0, padx=10, pady=10)
+texto_d8.grid(column=2, row=2, padx=10, pady=10)
 
 botao_d8 = Button(app, text="Aperte para rolar", command=rolar_d8)
-botao_d8.grid(column=2, row=1, padx=10, pady=10)
+botao_d8.grid(column=2, row=3, padx=10, pady=10)
 
 texto_resposta_d8 = Label(app, text="")
-texto_resposta_d8.grid(column=2, row=2, padx=10, pady=10)
+texto_resposta_d8.grid(column=2, row=4, padx=10, pady=10)
 
 texto_d6 = Label(app, text="D6")
-texto_d6.grid(column=3, row=0, padx=10, pady=10)
+texto_d6.grid(column=3, row=2, padx=10, pady=10)
 
 botao_d6 = Button(app, text="Aperte para rolar", command=rolar_d6)
-botao_d6.grid(column=3, row=1, padx=10, pady=10)
+botao_d6.grid(column=3, row=3, padx=10, pady=10)
 
 texto_resposta_d6 = Label(app, text="")
-texto_resposta_d6.grid(column=3, row=2, padx=10, pady=10)
+texto_resposta_d6.grid(column=3, row=4, padx=10, pady=10)
 
 texto_d4 = Label(app, text="D4")
-texto_d4.grid(column=4, row=0, padx=10, pady=10)
+texto_d4.grid(column=4, row=2, padx=10, pady=10)
 
 botao_d4 = Button(app, text="Aperte para rolar", command=rolar_d4)
-botao_d4.grid(column=4, row=1, padx=10, pady=10)
+botao_d4.grid(column=4, row=3, padx=10, pady=10)
 
 texto_resposta_d4 = Label(app, text="")
-texto_resposta_d4.grid(column=4, row=2, padx=10, pady=10)
+texto_resposta_d4.grid(column=4, row=4, padx=10, pady=10)
 
 vantagem_var = IntVar()
 desvantagem_var = IntVar()
 
-
 checkboxvantagem=Checkbutton(app, text="Vantagem", onvalue=1,variable=vantagem_var, offvalue=0,command=alternar_desalternar)
-checkboxvantagem.grid(column=0,row=5,padx=10,pady=10)
+checkboxvantagem.grid(column=0,row=1,padx=10,pady=10)
 
 checkboxdesvantagem=Checkbutton(app, text="Desvantagem",variable=desvantagem_var, onvalue=1, offvalue=0, command=alternar_desalternar)
-checkboxdesvantagem.grid(column=4,row=5,padx=10,pady=10)
+checkboxdesvantagem.grid(column=1,row=1,padx=10,pady=10)
 
 
-
+checkboxbonusd20=Checkbutton(app, text="Bonus", onvalue=1, offvalue=0,)
+checkboxbonusd20.grid(column=0,row=7, padx=10,pady=10,)
 
 app.mainloop()
