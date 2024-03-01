@@ -1,7 +1,32 @@
 import random
 from tkinter import *
-from tkinter import messagebox
+import tkinter.ttk as ttk
 
+
+class Tooltip:
+    def __init__(self, widget, text):
+        self.widget = widget
+        self.text = text
+        self.tooltip = None
+        self.widget.bind("<Enter>", self.show_tooltip)
+        self.widget.bind("<Leave>", self.hide_tooltip)
+
+    def show_tooltip(self, event):
+        x, y, _, _ = self.widget.bbox("insert")
+        x += self.widget.winfo_rootx() + 25
+        y += self.widget.winfo_rooty() + 25
+
+        self.tooltip = Toplevel(self.widget)
+        self.tooltip.wm_overrideredirect(True)
+        self.tooltip.wm_geometry(f"+{x}+{y}")
+
+        label = Label(self.tooltip, text=self.text, justify='left', background="#ffffe0", relief='solid', borderwidth=1)
+        label.pack(ipadx=1)
+
+    def hide_tooltip(self, event):
+        if self.tooltip:
+            self.tooltip.destroy()
+            self.tooltip = None
 
 def alternar_desalternar():
     if vantagem_var.get() == 1:
@@ -25,6 +50,11 @@ def armazenar_bonus():
     global bonus_valor
     bonus_valor = textobonus.get()
 
+def mostrar_soma():
+    resultado = texto_resposta_d20["text"]
+    bonus_soma = int(bonus_valor) if bonus_valor else 0
+    total_soma = int(resultado.split('/')[0]) + bonus_soma
+    tooltip = Tooltip(texto_resposta_d20, f"Soma: {total_soma}")
 
 def remover_bonus():
     textobonus.delete(0, END)
@@ -77,6 +107,7 @@ def rolar_d20():
             resposta=numero_aleatorio20 + int(bonus_valor)
 
             texto_resposta_d20["text"] = f"{resposta}"
+            Tooltip(texto_resposta_d20,f"{numero_aleatorio20} + {bonus_valor} = {resposta}")
 
         else: texto_resposta_d20["text"] =f"{numero_aleatorio20}"
         if numero_aleatorio20 == 20:
@@ -108,6 +139,7 @@ app = Tk()
 
 app.title("Sistema de Dados")
 app.geometry("700x500")
+
 
 
 texto_d20 = Label(app, text="D20")
@@ -160,7 +192,6 @@ vantagem_var = IntVar()
 desvantagem_var = IntVar()
 bonus_var = IntVar()
 bonus_valor = 0
-
 
 
 
