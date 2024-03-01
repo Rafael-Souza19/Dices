@@ -1,5 +1,6 @@
 import random
 from tkinter import *
+from tkinter import messagebox
 
 
 def alternar_desalternar():
@@ -13,22 +14,37 @@ def alternar_desalternar():
     else:
         checkboxvantagem["state"] = "normal"
 
+    if bonus_var.get()== 1:
+        textobonus["state"] ="normal"
+    else: textobonus["state"] = "disabled"
 
+def on_validate(P):
+    return P.isdigit() and len(P) <= 2 or P == ""
+
+def armazenar_bonus():
+    global bonus_valor
+    bonus_valor = textobonus.get()
+
+
+def remover_bonus():
+    textobonus.delete(0, END)
+    global bonus_valor
+    bonus_valor = 0
 def rolar_d20():
     
     if desvantagem_var.get() == 1:
-        numeros_aleatorios20 = random.choices(range(1, 21))
-        numeros_aleatorios201 = random.choices(range(1, 21))
+            numeros_aleatorios20 = random.choices(range(1, 21))
+            numeros_aleatorios201 = random.choices(range(1, 21))
 
-        if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
-            if numeros_aleatorios20[0] < numeros_aleatorios201[0]:
-                numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
-            else:
-                numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
+            if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
+                if numeros_aleatorios20[0] < numeros_aleatorios201[0]:
+                    numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
+                else:
+                    numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
                 
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
-        else: 
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+                texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+            else: 
+                texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
 
 
     elif vantagem_var.get() == 1:
@@ -57,15 +73,19 @@ def rolar_d20():
     
     else:
         numero_aleatorio20 = random.randint(1, 20)
-        texto_resposta_d20["text"] = f"{numero_aleatorio20}"
+        if bonus_valor and bonus_var.get() == 1:
+            resposta=numero_aleatorio20 + int(bonus_valor)
+
+            texto_resposta_d20["text"] = f"{resposta}"
+
+        else: texto_resposta_d20["text"] =f"{numero_aleatorio20}"
         if numero_aleatorio20 == 20:
             texto_resposta_d20["fg"] = "green"
         elif numero_aleatorio20 == 1:
             texto_resposta_d20["fg"] = "red"
         else:
             texto_resposta_d20["fg"] = "black"
-
-             
+       
 
 def rolar_d8():
     numero_aleatorio8 = random.randint(1, 8)
@@ -87,7 +107,7 @@ def rolar_d4():
 app = Tk()
 
 app.title("Sistema de Dados")
-app.geometry("600x500")
+app.geometry("700x500")
 
 
 texto_d20 = Label(app, text="D20")
@@ -138,6 +158,12 @@ texto_resposta_d4.grid(column=4, row=4, padx=10, pady=10)
 
 vantagem_var = IntVar()
 desvantagem_var = IntVar()
+bonus_var = IntVar()
+bonus_valor = 0
+
+
+
+
 
 checkboxvantagem=Checkbutton(app, text="Vantagem", onvalue=1,variable=vantagem_var, offvalue=0,command=alternar_desalternar)
 checkboxvantagem.grid(column=0,row=1,padx=10,pady=10)
@@ -146,7 +172,19 @@ checkboxdesvantagem=Checkbutton(app, text="Desvantagem",variable=desvantagem_var
 checkboxdesvantagem.grid(column=1,row=1,padx=10,pady=10)
 
 
-checkboxbonusd20=Checkbutton(app, text="Bonus", onvalue=1, offvalue=0,)
-checkboxbonusd20.grid(column=0,row=7, padx=10,pady=10,)
+checkboxbonusd20 = Checkbutton(app, text="Bonus", onvalue=1, offvalue=0, command=alternar_desalternar, variable=bonus_var)
+checkboxbonusd20.grid(column=0, row=7, padx=10, pady=10)
+
+vcmd = app.register(on_validate)
+
+textobonus = Entry(app, state="disabled", validate="key", validatecommand=(vcmd, '%P'))
+textobonus.grid(column=0, row=8, padx=10, pady=10)
+
+botao_armazenar = Button(app, text="Adicionar bônus", command=armazenar_bonus)
+botao_armazenar.grid(column=1, row=8, padx=10, pady=10)
+
+botao_remover= Button(app, text="Remover bônus", command=remover_bonus)
+botao_remover.grid(column=1, row=9, padx=10, pady=10)
+
 
 app.mainloop()
