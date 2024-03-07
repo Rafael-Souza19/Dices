@@ -92,7 +92,7 @@ def rolar_d20():
         else: 
             texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
 
-        if 20 in numeros_aleatorios20 or 20 in numeros_aleatorios201:
+        if 20 in numeros_aleatorios20[0] or 20 in numeros_aleatorios201[0]:
             texto_resposta_d20["foreground"] = "green"
         elif numeros_aleatorios20[0] == numeros_aleatorios201[0] == 1:
             texto_resposta_d20["foreground"] = "red"
