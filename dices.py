@@ -63,41 +63,56 @@ def remover_bonus():
 def rolar_d20():
     
     if desvantagem_var.get() == 1:
-            numeros_aleatorios20 = random.choices(range(1, 21))
-            numeros_aleatorios201 = random.choices(range(1, 21))
+        numeros_aleatorios20 = random.choices(range(1, 21))
+        numeros_aleatorios201 = random.choices(range(1, 21))
+        roll1 = numeros_aleatorios20[0]
+        roll2 = numeros_aleatorios201[0]
 
-            if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
-                if numeros_aleatorios20[0] < numeros_aleatorios201[0]:
-                    numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
-                else:
-                    numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
-                
-                texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
-            else: 
-                texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+        if bonus_valor and bonus_var.get() == 1: 
+            resposta=roll1+ int(bonus_valor)
+            resposta2= roll2 +int(bonus_valor)
+            if resposta != resposta2:
+                if resposta< resposta2:
+                    resposta= f"[{resposta}]"
+                else: resposta2= f"[{resposta2}]"
+            texto_resposta_d20["text"] = f"{resposta} / {resposta2}"
 
+            Tooltip(texto_resposta_d20,f"{roll1} + {bonus_valor} = {resposta}\n{roll2} + {bonus_valor} = {resposta2}" )
+            
+        
+
+        elif roll1 != roll2:
+            if roll1< roll2:
+                roll1= f"[{roll1}]"
+            else: roll2=f"[{roll2}]"
+            texto_resposta_d20["text"] = f"{roll1} / {roll2}"
 
     elif vantagem_var.get() == 1:
         
         numeros_aleatorios20 = random.choices(range(1, 21))
         numeros_aleatorios201 = random.choices(range(1, 21))
+        roll1 = numeros_aleatorios20[0]
+        roll2 = numeros_aleatorios201[0]
 
-        if numeros_aleatorios20[0] != numeros_aleatorios201[0]:
-            if numeros_aleatorios20[0] > numeros_aleatorios201[0]:
-                numeros_aleatorios20[0] = f"[{numeros_aleatorios20[0]}]"
-            else:
-                numeros_aleatorios201[0] = f"[{numeros_aleatorios201[0]}]"
-                
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
-        else: 
-            texto_resposta_d20["text"] = f"{numeros_aleatorios20[0]} / {numeros_aleatorios201[0]}"
+        if bonus_valor and bonus_var.get() == 1: 
+            resposta=roll1+ int(bonus_valor)
+            resposta2= roll2 +int(bonus_valor)
+            if resposta != resposta2:
+                if resposta> resposta2:
+                    resposta= f"[{resposta}]"
+                else: resposta2= f"[{resposta2}]"
+            texto_resposta_d20["text"] = f"{resposta} / {resposta2}"
 
-        if 20 in numeros_aleatorios20[0] or 20 in numeros_aleatorios201[0]:
-            texto_resposta_d20["foreground"] = "green"
-        elif numeros_aleatorios20[0] == numeros_aleatorios201[0] == 1:
-            texto_resposta_d20["foreground"] = "red"
-        else:
-            texto_resposta_d20["foreground"] = "black"
+            Tooltip(texto_resposta_d20,f"{roll1} + {bonus_valor} = {resposta}\n{roll2} + {bonus_valor} = {resposta2}" )
+            
+        
+
+        elif roll1 != roll2:
+            if roll1> roll2:
+                roll1= f"[{roll1}]"
+            else: roll2=f"[{roll2}]"
+            texto_resposta_d20["text"] = f"{roll1} / {roll2}"
+        
     
 
     
