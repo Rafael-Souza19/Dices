@@ -162,11 +162,11 @@ app.iconphoto(False, icone_app)
 frame = Frame(app, bg="white", bd=5, relief="ridge")
 frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.75, anchor="n")
 
-# Adiciona um título
+# título
 title_label = Label(frame, text="Dados", bg="white", font=("Arial", 16))
 title_label.pack(fill="x", pady=10)
 
-# Adiciona um frame para os botões e textos de resposta
+# frame para os botões e textos de resposta
 buttons_frame = Frame(frame, bg="white")
 buttons_frame.pack(pady=20)
 
@@ -206,9 +206,6 @@ bonus_var = IntVar()
 bonus_valor = 0
 
 
-
-
-vantagem_var = IntVar()
 checkbox_vantagem = Checkbutton(frame, text="Vantagem", variable=vantagem_var, bg="white", font=("Arial", 12), command=alternar_desalternar)
 checkbox_vantagem.pack()
 
