@@ -32,14 +32,14 @@ class Tooltip:
 
 def alternar_desalternar():
     if vantagem_var.get() == 1:
-        checkboxdesvantagem["state"] = "disabled"
+        checkbox_desvantagem["state"] = "disabled"
     else:
-        checkboxdesvantagem["state"] = "normal"
+        checkbox_desvantagem["state"] = "normal"
 
     if desvantagem_var.get() == 1:
-        checkboxvantagem["state"] = "disabled"
+        checkbox_vantagem["state"] = "disabled"
     else:
-        checkboxvantagem["state"] = "normal"
+        checkbox_vantagem["state"] = "normal"
 
     if bonus_var.get()== 1:
         textobonus["state"] ="normal"
@@ -151,7 +151,7 @@ def rolar_d4():
 #INTERFACE
 app = Tk()
 
-app.title("Sistema de Dados")
+app.title("Dices")
 app.geometry("700x500")
 
 imagem_icone = Image.open("d20.png")
@@ -159,56 +159,46 @@ icone_app = ImageTk.PhotoImage(imagem_icone)
 
 app.iconphoto(False, icone_app)
 
+frame = Frame(app, bg="white", bd=5, relief="ridge")
+frame.place(relx=0.5, rely=0.1, relwidth=0.75, relheight=0.75, anchor="n")
 
+# Adiciona um título
+title_label = Label(frame, text="Dados", bg="white", font=("Arial", 16))
+title_label.pack(fill="x", pady=10)
 
-texto_d20 = Label(app, text="D20")
-texto_d20.grid(column=0, row=2, padx=10, pady=10)
+# Adiciona um frame para os botões e textos de resposta
+buttons_frame = Frame(frame, bg="white")
+buttons_frame.pack(pady=20)
 
-botao_d20 = Button(app, text="Aperte para rolar", command=rolar_d20)
-botao_d20.grid(column=0, row=3, padx=10, pady=10)
+# Botões e textos de resposta para D20
+botao_d20 = Button(buttons_frame, text="D20", bg="lightblue", font=("Arial", 12), relief="raised", padx=20, pady=10, command=rolar_d20)
+botao_d20.grid(row=0, column=0, padx=10)
+texto_resposta_d20 = Label(buttons_frame, text="", font=("Arial", 14, "bold"), bg="lightblue", relief="solid")
+texto_resposta_d20.grid(row=1, column=0, padx=10, pady=10)
 
-texto_resposta_d20 = Label(app, text="")
-texto_resposta_d20.grid(column=0, row=4, padx=10, pady=10)
+# Botões e textos de resposta para D12
+botao_d12 = Button(buttons_frame, text="D12", bg="lightgreen", font=("Arial", 12), relief="raised", padx=20, pady=10, command=rolar_d12)
+botao_d12.grid(row=0, column=1, padx=10)
+texto_resposta_d12 = Label(buttons_frame, text="", font=("Arial", 14, "bold"), bg="lightgreen", relief="solid")
+texto_resposta_d12.grid(row=1, column=1, padx=10, pady=10)
 
+# Botões e textos de resposta para D8
+botao_d8 = Button(buttons_frame, text="D8", bg="lightpink", font=("Arial", 12), relief="raised", padx=20, pady=10, command=rolar_d8)
+botao_d8.grid(row=0, column=2, padx=10)
+texto_resposta_d8 = Label(buttons_frame, text="", font=("Arial", 14, "bold"), bg="lightpink", relief="solid")
+texto_resposta_d8.grid(row=1, column=2, padx=10, pady=10)
 
-texto_d12 = Label(app, text="D12")
-texto_d12.grid(column=1, row=2, padx=10, pady=10)
+# Botões e textos de resposta para D6
+botao_d6 = Button(buttons_frame, text="D6", bg="lightyellow", font=("Arial", 12), relief="raised", padx=20, pady=10, command=rolar_d6)
+botao_d6.grid(row=0, column=3, padx=10)
+texto_resposta_d6 = Label(buttons_frame, text="", font=("Arial", 14, "bold"), bg="lightyellow", relief="solid")
+texto_resposta_d6.grid(row=1, column=3, padx=10, pady=10)
 
-botao_d12 = Button(app, text="Aperte para rolar", command=rolar_d12)
-botao_d12.grid(column=1, row=3, padx=10, pady=10)
-
-texto_resposta_d12 = Label(app, text="")
-texto_resposta_d12.grid(column=1, row=4, padx=10, pady=10)
-
-
-texto_d8 = Label(app, text="D8")
-texto_d8.grid(column=2, row=2, padx=10, pady=10)
-
-botao_d8 = Button(app, text="Aperte para rolar", command=rolar_d8)
-botao_d8.grid(column=2, row=3, padx=10, pady=10)
-
-texto_resposta_d8 = Label(app, text="")
-texto_resposta_d8.grid(column=2, row=4, padx=10, pady=10)
-
-
-texto_d6 = Label(app, text="D6")
-texto_d6.grid(column=3, row=2, padx=10, pady=10)
-
-botao_d6 = Button(app, text="Aperte para rolar", command=rolar_d6)
-botao_d6.grid(column=3, row=3, padx=10, pady=10)
-
-texto_resposta_d6 = Label(app, text="")
-texto_resposta_d6.grid(column=3, row=4, padx=10, pady=10)
-
-
-texto_d4 = Label(app, text="D4")
-texto_d4.grid(column=4, row=2, padx=10, pady=10)
-
-botao_d4 = Button(app, text="Aperte para rolar", command=rolar_d4)
-botao_d4.grid(column=4, row=3, padx=10, pady=10)
-
-texto_resposta_d4 = Label(app, text="")
-texto_resposta_d4.grid(column=4, row=4, padx=10, pady=10)
+# Botões e textos de resposta para D4
+botao_d4 = Button(buttons_frame, text="D4", bg="lightcoral", font=("Arial", 12), relief="raised", padx=20, pady=10, command=rolar_d4)
+botao_d4.grid(row=0, column=4, padx=10)
+texto_resposta_d4 = Label(buttons_frame, text="", font=("Arial", 14, "bold"), bg="lightcoral", relief="solid")
+texto_resposta_d4.grid(row=1, column=4, padx=10, pady=10)
 
 vantagem_var = IntVar()
 desvantagem_var = IntVar()
@@ -218,26 +208,33 @@ bonus_valor = 0
 
 
 
-checkboxvantagem=Checkbutton(app, text="Vantagem", onvalue=1,variable=vantagem_var, offvalue=0,command=alternar_desalternar)
-checkboxvantagem.grid(column=0,row=1,padx=10,pady=10)
+vantagem_var = IntVar()
+checkbox_vantagem = Checkbutton(frame, text="Vantagem", variable=vantagem_var, bg="white", font=("Arial", 12), command=alternar_desalternar)
+checkbox_vantagem.pack()
 
-checkboxdesvantagem=Checkbutton(app, text="Desvantagem",variable=desvantagem_var, onvalue=1, offvalue=0, command=alternar_desalternar)
-checkboxdesvantagem.grid(column=1,row=1,padx=10,pady=10)
+# Checkbox desvantagem
+desvantagem_var = IntVar()
+checkbox_desvantagem = Checkbutton(frame, text="Desvantagem", variable=desvantagem_var, bg="white", font=("Arial", 12), command=alternar_desalternar)
+checkbox_desvantagem.pack()
 
+# Checkbox bônus
+bonus_var = IntVar()
+checkbox_bonus = Checkbutton(frame, text="Bônus", variable=bonus_var, bg="white", font=("Arial", 12), command=alternar_desalternar)
+checkbox_bonus.pack()
 
-checkboxbonusd20 = Checkbutton(app, text="Bonus", onvalue=1, offvalue=0, command=alternar_desalternar, variable=bonus_var)
-checkboxbonusd20.grid(column=0, row=7, padx=10, pady=10)
+# Entry do bônus
+textobonus = Entry(frame, state="disabled", validate="key", validatecommand=(app.register(on_validate), '%P'))
+textobonus.pack()
+
+# Botões de armazenar e remover bônus
+botao_armazenar = Button(frame, text="Adicionar Bônus", command=armazenar_bonus)
+botao_armazenar.pack(pady=5)
+
+botao_remover = Button(frame, text="Remover Bônus", command=remover_bonus)
+botao_remover.pack(pady=5)
 
 vcmd = app.register(on_validate)
 
-textobonus = Entry(app, state="disabled", validate="key", validatecommand=(vcmd, '%P'))
-textobonus.grid(column=0, row=8, padx=10, pady=10)
-
-botao_armazenar = Button(app, text="Adicionar bônus", command=armazenar_bonus)
-botao_armazenar.grid(column=1, row=8, padx=10, pady=10)
-
-botao_remover= Button(app, text="Remover bônus", command=remover_bonus)
-botao_remover.grid(column=1, row=9, padx=10, pady=10)
 
 
 app.mainloop()
