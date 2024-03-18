@@ -1,6 +1,8 @@
 import random
 from tkinter import *
 import tkinter.ttk as ttk
+from PIL import Image, ImageTk, ImageFilter
+
 
 
 class Tooltip:
@@ -61,7 +63,19 @@ def remover_bonus():
     global bonus_valor
     bonus_valor = 0
 def rolar_d20():
-     
+    
+    #ROLL NORMAL, COM BONUS OU SEM
+    numero_aleatorio20 = random.randint(1, 20)
+    if bonus_valor and bonus_var.get() == 1:
+            resposta=numero_aleatorio20 + int(bonus_valor)
+
+            texto_resposta_d20["text"] = f"{resposta}"
+            Tooltip(texto_resposta_d20,f"{numero_aleatorio20} + {bonus_valor} = {resposta}")
+
+    else: texto_resposta_d20["text"] =f"{numero_aleatorio20}"
+    
+ 
+
     #ROLL COM DESVANTAGEM, COM BONUS OU SEM
     if desvantagem_var.get() == 1:
         des_numeros_aleatorios20 = random.choices(range(1, 21))
@@ -87,11 +101,10 @@ def rolar_d20():
                 roll1= f"[{roll1}]"
             else: roll2=f"[{roll2}]"
             texto_resposta_d20["text"] = f"{roll1} / {roll2}"
-        
 
 
     #ROLL COM VANTAGEM, COM BONUS OU SEM
-    elif vantagem_var.get() == 1:
+    if vantagem_var.get() == 1:
         
         van_numeros_aleatorios20 = random.choices(range(1, 21))
         van_numeros_aleatorios201 = random.choices(range(1, 21))
@@ -109,31 +122,13 @@ def rolar_d20():
                 resposta= f"[{resposta}]"
             else: resposta2= f"[{resposta2}]"
         texto_resposta_d20["text"] = f"{resposta} / {resposta2}"
+
         Tooltip(texto_resposta_d20,f"{roll1} + {bonus_valor} = {resposta}\n{roll2} + {bonus_valor} = {resposta2}" )
-        if roll1 == 20 or roll2 == 20:
-            texto_resposta_d20["fg"] = "green"
-        elif roll1 == 1 and roll2 == 1:
-            texto_resposta_d20["fg"] = "red"
-        else:
-            texto_resposta_d20["fg"] = "black"
-
-
-
-    #ROLL NORMAL, COM BONUS OU SEM
-    else:numero_aleatorio20 = random.randint(1, 20)
-    if bonus_valor and bonus_var.get() == 1:
-            resposta=numero_aleatorio20 + int(bonus_valor)
-
-            texto_resposta_d20["text"] = f"{resposta}"
-            Tooltip(texto_resposta_d20,f"{numero_aleatorio20} + {bonus_valor} = {resposta}")
-
-    else: texto_resposta_d20["text"] =f"{numero_aleatorio20}"
-    if numero_aleatorio20 ==20:
-        texto_resposta_d20["fg"]="green"
-    elif numero_aleatorio20 ==1:
-        texto_resposta_d20["fg"]="red"
-    else: texto_resposta_d20["fg"]="black"
             
+        
+
+
+        
        
 
 def rolar_d8():
@@ -153,10 +148,16 @@ def rolar_d4():
     texto_resposta_d4["text"] = f"{numero_aleatorio4}"
 
 
+#INTERFACE
 app = Tk()
 
 app.title("Sistema de Dados")
 app.geometry("700x500")
+
+imagem_icone = Image.open("d20.png")
+icone_app = ImageTk.PhotoImage(imagem_icone)
+
+app.iconphoto(False, icone_app)
 
 
 
@@ -179,6 +180,7 @@ botao_d12.grid(column=1, row=3, padx=10, pady=10)
 texto_resposta_d12 = Label(app, text="")
 texto_resposta_d12.grid(column=1, row=4, padx=10, pady=10)
 
+
 texto_d8 = Label(app, text="D8")
 texto_d8.grid(column=2, row=2, padx=10, pady=10)
 
@@ -188,6 +190,7 @@ botao_d8.grid(column=2, row=3, padx=10, pady=10)
 texto_resposta_d8 = Label(app, text="")
 texto_resposta_d8.grid(column=2, row=4, padx=10, pady=10)
 
+
 texto_d6 = Label(app, text="D6")
 texto_d6.grid(column=3, row=2, padx=10, pady=10)
 
@@ -196,6 +199,7 @@ botao_d6.grid(column=3, row=3, padx=10, pady=10)
 
 texto_resposta_d6 = Label(app, text="")
 texto_resposta_d6.grid(column=3, row=4, padx=10, pady=10)
+
 
 texto_d4 = Label(app, text="D4")
 texto_d4.grid(column=4, row=2, padx=10, pady=10)
